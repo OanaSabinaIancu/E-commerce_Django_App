@@ -1,0 +1,46 @@
+{% extends 'store/main.html' %}
+
+{% load static %}
+
+{% block content %}
+
+<div class = "justify-between text-xl p-6">
+    <div class="p-10 border border-2 border-purple-700 rounded-xl">
+        <h1 class="text-center text-2xl">Profil<h1>
+        <img class="object-contain h-70 w-60 rounded-xl" scr="{{request.user.customer.profile_pic.url }}"/>
+        <form method = "POST" action = "" enctype = "multipart/form-data">
+
+            {% csrf_token %}
+
+            <div class="grid grid-cols-2 text-left">
+                <div>
+                    <img src = "{{request.user.customer.profile_pic.url}}" class="object-contain h-70 w-60 rounded-xl">
+                    <p class="text-xl">Alege imaginea de profil</p>
+                    {{form.profile_pic}}
+                </div>
+
+                <div>
+                    <p class="text-xl">Nume de utilizator</p>
+
+                    {{form.username}}
+
+                    <p class="text-xl">Nume</p>
+
+                    {{form.firstName}}
+
+                    <p class="text-xl">Prenume</p>
+
+                    {{form.lastName}}
+
+                    <p class="text-xl">Email</p>
+                    {{form.email}}
+                </div>
+            </div>
+            <br>
+            <input class="btn btn-outline-secondary rounded-lg p-2 text-center bg-gradient-to-r from-purple-500 to-pink-600 text-white hover:bg-gradient-to-r hover:from-purple-400 hover:to-pink-500" type="submit" name = "update Profile">
+        </form>
+        <a href = "{% url 'profile/<std:id>'%}" class="btn btn-outline-secondary rounded-lg p-2 text-center bg-gradient-to-r from-purple-500 to-pink-600 text-white hover:bg-gradient-to-r hover:from-purple-400 hover:to-pink-500">Înapoi la pagina de profil</a>
+    </div>
+</div>
+
+{%endblock content%}

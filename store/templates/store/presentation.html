@@ -1,0 +1,75 @@
+{% extends 'store/main.html' %}
+
+{% load static %}
+
+{% block content %}
+
+<div>
+    <h1 class="text-center text-3xl p-4">Prezentare</h1>
+
+    <strong class="text-left p-4 text-2xl text-pink-800">Atentie! Consumul excesiv al dulciurilor poate provoca boli grave!</strong>
+
+    <p class="text-left text-xl p-4">Buna tuturor! Numele meu este Sabina si am decis sa imi deschid aceasta coftarie, in urma cu 5 ani, impreuna cu Larisa.
+        Eram amandoua pasionate de gatit asa ca am decis sa incercam sa aducem zambetul pe buzele oamenilor si sa le facem ziua mai buna cu
+        ceva dulce. Amandoua aveam rude la tara asa ca puteam procura suficiente ingrediente 100% naturale sustindand totodata cativa producatori autohtoni pentru a oferi tot ce este mai bun clientilor nostrii. Am inceput de la vanzarea
+        prajiturilor cunoscutilor, iar acum am ajuns sa detinem 10 magazine in Bucuresti si in tara, dar suntem in proces de extindere. Mica noastra"afacere"a devenit una foarte prospera datorita calitatii produselor noastre. Sincer,
+        nu credeam ca o sa placa atat de mult oamenilor, insa pasiunea pentru ce faceam si dragostea pe care o puneam a fost recunoscuta si apreciata de clienti. Cunoscandu-ne dorinta de a ne face clientii fericiti am incercat sa aducem
+        langa noi oameni cu aceleasi aspiratii ca noi si am incercat, pe cat posibil, sa le oferim un mediu cat mai primitor la locul de munca.
+        {% load static %} <img class="w-40 h-40 flex-row items-left  inline border-2-black rounded-lg" src="{% static "/images/logo-moft.jpg" %}" alt="home" />
+    </p>
+
+    <h2 class="text-left text-2xl p-4"><strong>Ce planuri avem pentru viitor?</strong></h2>
+    <p class="text-left text-xl p-4">Avem de gand sa imbunatatim conditiile de lucru ale angajatilor, sa implementam o camera de odihna pentru restul filialelor unde nu am apucat sa facem acest lucru. Dorim dealtfel sa imbunatatim aparatura pentru afacilita productia.
+        Cum cererea la magazinele fizice este din ce in ce mai mare cautam locatii pentru urmatoarele magazine si in alte orase din tara.Pentru inceputvom avea deschiderea oficiala a unei noi cofetarii in Timisoara. Ne propunem
+        sa crestem numarul producatorilor locali de la care achizitionam ingredientele, astfel ca vom ajuta oamenii sa isi promoveze produsele, imbunatatind o parte din agricultura autohtona. Dorim sa organizam o campanie de recrutare
+        a muncitorilor din zona rurala, dar cautam si retete traditionale de la bunicile crescute si nascute la tara. Cautam retete cat mai vechi si incercam sa le readucem in vietile cumparatorilor nostrii pentru a le trezi amintirile
+        de care vor sa isi aduca aminte cu drag.Avem in plan sa organizam o strangere de fonduri anuala pentru reabilitarea caselor oamenilor saraci din mediile defavorizate si pentru a le oferi acestora o viata mai buna.
+    </p>
+
+    <section class="overflow-hidden text-gray-700">
+        <div class="container px-5 py-2 mx-auto lg:pt-24 lg:px-32">
+          <div class="flex flex-wrap -m-1 md:-m-2">
+            <div class="flex flex-wrap w-1/2">
+              <div class="w-1/2 p-1 md:p-2">
+                <img alt="gallery" class="block object-cover object-center w-full h-full rounded-lg"
+                  src="{% static "/images/branzoaica.jpg" %}">
+              </div>
+              <div class="w-1/2 p-1 md:p-2">
+                <img alt="gallery" class="block object-cover object-center w-full h-full rounded-lg"
+                  src="{% static "/images/gelatina.jpg" %}">
+              </div>
+              <div class="w-full p-1 md:p-2">
+                <img alt="gallery" class="block object-cover object-center w-full h-full rounded-lg"
+                  src="{% static "/images/vafe.jpg" %}">
+              </div>
+            </div>
+            <div class="flex flex-wrap w-1/2">
+              <div class="w-full p-1 md:p-2">
+                <img alt="gallery" class="block object-cover object-center w-full h-full rounded-lg"
+                  src="{% static "/images/galerieRoz.jpg" %}">
+              </div>
+              <div class="w-1/2 p-1 md:p-2">
+                <img alt="gallery" class="block object-cover object-center w-full h-full rounded-lg"
+                src="{% static "/images/galerieMov.jpg" %}">
+
+              </div>
+              <div class="w-1/2 p-1 md:p-2">
+                <img alt="gallery" class="block object-cover object-center w-full h-full rounded-lg"
+                src="{% static "/images/galerie.jpg" %}">
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    <h2 class="text-left text-xl p-4"><strong>Despre produsele noastre</strong></h2>
+    <p class="text-left text-xl p-4">Incercam sa acoperim o gama cat mai larga de clienti si sa le respectam gusturile pana si celor mai pretentiosi dintre ei. Scopul nostru este sa imbunatatim calitatea produselor noastre si sa oferim clientilor nostrii. Preturile
+        noastre sunt adaptate in functie de bugetul fiecaruia. Indiferent daca comanzi online sau vii in cofetariile noastre vei primi produsul in cutii cat mai interesante, iar gustul va fi pe masura prezentarii. Daca alegi sa
+        mananci intr-una din cofetariile noastre iti punem la dispozitie canapele comfortabile de piele colorata, mobila noua de cea mai buna calitate si decoratiuni florale care atrag atentia. Mirosurile subtile de cozonac proaspat
+        copt, focul semineului si canapeaua comfortabila aduc adeasea senzatia placuta a sarbatorilor.
+    </p>
+
+</div>
+
+{%endblock content%}

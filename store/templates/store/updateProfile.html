@@ -1,0 +1,56 @@
+{% extends 'store/main.html' %}
+
+{% load static %}
+
+{% block content %}
+<br>
+<h1 class="text-center text-2xl"><strong>Setări profil</strong></h1>
+<div class = "justify-between text-xl p-6">
+    <div class="p-10 border border-2 border-purple-900 rounded-xl grid grid-cols-2">
+        
+        <div class="object-center p-4">
+            {%if request.user.customer.profile_pic%}
+                <img class="object-contain h-75 w-65 rounded-xl"src="{{request.user.customer.profileURL}}" alt="home" alt="home"/>
+            {%else%}
+                {% load static %} <img class="object-contain h-75 w-65 rounded-xl"src="{% static "/images/profil3.jpg" %}" alt="home" alt="home"/>
+            {%endif%}
+        </div>
+        <form method="POST" action = "" enctype="multipart/form-data" class="p-4">
+            {%csrf_token%}
+            <div class="p-4">
+                <div>
+                    
+                        <div class="p-2">
+                            {{form.firstName}}
+                        </div>
+                        <div class="p-2">
+                            {{form.lastName}}
+                        </div>
+                        <div class="p-2">
+                            {{form.email}}
+                        </div>
+                        <div class="p-2">
+                            {{form.phone}}
+                        </div>
+
+                        <div class="p-2">
+                            {{form.profile_pic}}
+                        </div>
+                
+                </div>
+                
+                <div class="grid grid-cols-2 p-4">
+                    <input class="px-10 rounded-lg p-2 text-center bg-gradient-to-r from-purple-500 to-pink-600 text-white hover:bg-gradient-to-r hover:from-purple-400 hover:to-pink-500" type = "submit"></input>
+                    <a class="btn btn-outline-succes btn btn-block add-btn rounded-lg p-4 text-center bg-gradient-to-r from-blue-500 to-purple-600 text-white hover:bg-gradient-to-r hover:from-blue-400 hover:to-purple-500" href="{% url 'profile' %}">Revino la pagina de profil</a>
+                </div>
+            
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    
+</div>
+
+{%endblock content%}

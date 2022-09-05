@@ -1,0 +1,61 @@
+{% extends 'store/main.html' %}
+
+{% load static %}
+
+{% block content %}
+
+<div class="grid grid-cols-4 text-center">
+    <div>
+        <strong class="text-xl">Articole: {{order.get_cart_items}} </strong>
+    </div>
+    <div>
+    </div>
+    <div>
+    </div>
+    <div>
+        <strong class="text-xl">Total: {{order.get_cart_total|floatformat:2}} lei</strong>
+    </div>
+</div>
+
+<br>
+<hr class="border-indigo-700">
+<div class="p-3 text-lg md:text-xl lg:text-2xl">
+    <div class="p-2">
+        <div class="grid grid-cols-5">
+            <div class="col-span-2 text-center"><strong>Articol</strong> </div>
+            <div class=""><strong>Pret</strong> </div>
+            <div class=""><strong>Cantitate</strong> </div>
+            <div class=""><strong>Total</strong> </div>
+        </div>
+        <br>
+        {% for item in items%}
+        <div class="grid grid-cols-5">
+            <div class=""><img class="w-60 h-30 rounded-xl p-2 gap-y-2" src="{{item.product.imageURL}}"></div>
+            <div class=""><strong class="text-center gap-y-2">{{item.product.name}}</strong> </div>
+            <div class=""><strong>{{item.product.price | floatformat:2}}</strong> </div>
+            <div class="inline-flex">
+                <p class="quantity">{{item.quantity}}</p>
+                <div class="quantity text-center inline-block px-2 -py-4">
+                    <button data-product={{item.product.id}} data-action="add" class="update-cart"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"></path></svg></button>
+                    <button data-product={{item.product.id}} data-action="remove" class="update-cart"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></button>
+                </div>
+            </div>
+            <div class="">{{item.get_total}} lei</div>
+            
+        </div>
+        {%endfor%}
+    </div>
+</div>
+<div class="grid grid-cols-2 text-center">
+    
+    <div> 
+        <!--<button class="btn btn-outline-secondary add-btn rounded-lg p-2 text-center bg-gradient-to-r from-purple-500 to-pink-600 text-white hover:bg-gradient-to-r hover:from-purple-400 hover:to-pink-500">Continua cumparaturile</button>-->
+        <a class="btn btn-outline-secondary add-btn rounded-lg p-3 text-center bg-gradient-to-r from-purple-600 to-pink-600 text-white hover:bg-gradient-to-r hover:from-purple-400 hover:to-pink-500 text-xl" href="{% url 'store' %}">Continua cumparaturile</a>
+    </div>
+    <div>
+        <!--<button class="btn btn-outline-secondary add-btn rounded-lg p-2 text-center bg-gradient-to-r from-purple-500 to-pink-600 text-white hover:bg-gradient-to-r hover:from-purple-400 hover:to-pink-500">Finlizeaza comanda</button>-->
+        <a class="btn btn-outline-secondary rounded-lg p-3 text-center bg-gradient-to-r from-purple-600 to-pink-600 text-white hover:bg-gradient-to-r hover:from-purple-400 hover:to-pink-500 text-xl" href="{% url 'checkout' %}">Finlizeaza comanda</a>
+    </div>
+</div>
+<br>
+{%endblock content%}

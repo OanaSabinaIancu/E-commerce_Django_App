@@ -1,0 +1,21 @@
+{% extends 'store/main.html' %}
+
+{% load static %}
+
+{% block content %}
+
+<div class="grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1">
+    {% for recipe in recipes %}
+    <div class="grid grid-cols-2">
+        <div>
+            <a href="{{ recipe.id }}"><img class="rounded-lg object-contain h-40 w-60 p-4" src="{{ recipe.imageURL }}"></a>
+        </div>
+
+        <div>
+            <a href = "{{ recipe.id }}" class="text-purple-900 text-2xl p-2" >{{ recipe.title }}</a>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+{%endblock content%}

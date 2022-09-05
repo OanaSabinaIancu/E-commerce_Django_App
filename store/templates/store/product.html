@@ -1,0 +1,133 @@
+{% extends 'store/main.html' %}
+
+{% load static %}
+
+    
+{% block content %}
+
+<div class= "lg:grid grid-cols-2">
+    <div class="border-purple-500 rounded-xl p-4">
+        <img class="object-contain border-4 border-purple-900 rounded-lg h-80 w-100 " src="{{ product.imageURL }}">
+
+        <form method="POST" action = "">
+
+            {% csrf_token %}
+
+            <label class="text-xl">Cum ţi se pare produsul nostru?</label></br>
+
+            <div class="rate">
+
+                <!--<input  type="radio" name = "rating" id = "rating9" required value = "5"><label for = "rating9" title = "5"></label></input>
+                <input  type="radio" name = "rating" id = "rating8" required value = "4.5"><label for = "rating8" title = "4.5" class="half"></label></input>
+                <input  type="radio" name = "rating" id = "rating7" required value = "4"><label for = "rating7" title = "4"></label></input>
+                <input  type="radio" name = "rating" id = "rating6" required value = "3.5"><label for = "rating6" title = "3.5" class="half"></label></input>
+                <input  type="radio" name = "rating" id = "rating5" required value = "3"><label for = "rating5" title = "3"></label></input>
+                <input  type="radio" name = "rating" id = "rating4" required value = "2.5"><label for = "rating4" title = "2.5" class="half"></label></input>
+                <input  type="radio" name = "rating" id = "rating3" required value = "2"><label for = "rating3" title = "2" ></label></input>
+                <input  type="radio" name = "rating" id = "rating2" required value = "1.5"><label for = "rating2" title = "1.5" class="half"></label></input>
+                <input  type="radio" name = "rating" id = "rating1" required value = "1"><label for = "rating1" title = "1"></label></input>
+                <input  type="radio" name = "rating" id = "rating0" required value = "0.5"><label for = "rating0" title = "0.5" class="half"></label></input>-->
+                
+            </div>
+
+            <div class="p-2">
+                <p class="text-xl">Titlul recenziei</p>
+                {{form.revtitle}}
+                <!--<input type="text" class="form-control" name="subiect">--></br>
+                <p class="text-xl">Recenzia</p>
+                {{form.revmess}}
+                <!--<textarea name = "review" rows = '4' class="form-control"></textarea>--></br>
+
+                <input type = "submit" value="Adaugă recenzie" class="border border-blue-500 rounded-lg p-2 text-center bg-gradient-to-r from-blue-500 to-purple-600 text-white hover:bg-gradient-to-r hover:from-blue-400 hover:to-purple-500">
+            </div>
+
+            
+            <style>
+
+                .rate > input {
+                    display: none;
+                }
+
+                .rate{
+                    display: inline-block;
+                    border: 0;
+                }
+
+                .rate > label {
+                    float: right;
+                }
+
+                .rate > label:before{
+                    display: inline-block;
+                    font-size: 1.1rem;
+                    font-family: FontAwesome;
+                    content: "\f005";
+                    margin: 0;
+                    padding:0.3rem .2rem;
+                    cursor: pointer;
+                }
+
+                .rate .half:before{
+                    
+                    content: "\f089";
+                    position: absolute;
+                    padding-right:0;
+                }
+
+                input:checked ~ label, label:hover ~ label{
+                    color: rgb(252 211 77);
+
+                }
+
+                input:checked + label:hover, input:checked ~ label:hover, input:checked ~ label:hover ~ label, label:hover ~ input:checked ~ label{
+                    color: rgb(253 230 138);
+                }
+            </style>
+        </form>
+        
+    </div>
+
+    <div>
+        <small class="text-2xl text-pink-800 line-through">
+            {{product.price|floatformat:2}} Lei
+        </small><br>
+        <strong class="text-2xl text-purple-800">
+          {{discount|floatformat:2}} Lei
+        </strong> 
+        <div class= "grid grid-cols-2">
+            <div class="p-4">
+                <p class="text-left p-0 text-xl"><strong>Ingrediente: </strong></p>
+                {% for i in ingred %}
+                    <p class="text-left p-0 text-lg">{{ i }}</p>
+                {% endfor %}
+            </div>
+            <div class="p-4">
+                <p class="text-left p-0 text-xl"><strong>Alergeni: </strong></p>
+                {% for i in alerg %}
+                    <p class="text-left p-0 text-lg">{{ i }}</p>
+                {% endfor %}
+            </div> 
+        </div>
+
+        <div class= "grid grid-cols-2">
+            <div >
+                
+            </div>
+            <div class="p-4">
+                <button data-product={{product.id}} data-action="add" class="px-10 btn btn-outline-secondary add-btn rounded-lg p-2 text-center bg-gradient-to-r from-purple-500 to-pink-600 text-white hover:bg-gradient-to-r hover:from-purple-400 hover:to-pink-500 add-btn update-cart">Adauga in cos</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="grid xl:grid-cols-4 md: grid-col-2 sm: grid-col-1">
+    {% for review in reviews%}
+    <div class=" p-4">
+        <h3 class="p-2 border-pink-600 rounded-lg bg-gradient-to-r from-purple-600 to-pink-700 text-white text-left text-xl">{{review.revtitle}}</h3>
+        <p class="border-2 border-purple-600 rounded-xl p-4 bg-gradient-to-r from-purple-300 to-blue-200">{{review.revmess}}</p>
+        <br>
+    </div>
+    {%endfor%}
+</div>
+
+{% endblock content %}

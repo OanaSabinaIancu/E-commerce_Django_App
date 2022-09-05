@@ -1,0 +1,200 @@
+{% extends 'store/main.html' %}
+
+{% load static %}
+
+{% block content %}
+
+<div class="p-5 text-xl">
+    <form id = "form">
+        {% csrf_token %} 
+       
+        <div id="shipping-info">
+            <br>
+            <h2 class="px-20">Adresa de livrare:</p>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 text-left">
+                <div>
+                    <label for="address" >Adresa</label><br>
+                    <input type="text" id="address" name="address"><br>
+                </div>
+                <div>
+                    <label for="city">Oras</label><br>
+                    <input type="text" id="city" name="city"><br>
+                </div>
+                <div>
+                    <label for="road">Tara</label><br>
+                    <input type="text" id="road" name="road"><br>
+                </div>
+                <div >
+                    <label for="building">Cod postal</label><br>
+                    <input type="text" id="building" name="building"><br><br>
+                </div>
+    
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 text-left">  
+                <a class="btn btn-outline-succes btn btn-block add-btn rounded-lg p-2 text-center bg-gradient-to-r from-purple-500 to-pink-600 text-white hover:bg-gradient-to-r hover:from-purple-400 hover:to-pink-500" href="{% url 'cart' %}">Revino la cosul de cumparaTuri</a>
+                <div></div>
+                <div></div>
+                <!--<button class="btn btn-outline-secondary add-btn rounded-lg p-2 text-center bg-gradient-to-r from-purple-500 to-pink-600 text-white hover:bg-gradient-to-r hover:from-purple-400 hover:to-pink-500">Trimite datele</button>-->
+                <input id="form-button" type = "submit" class="btn btn-outline-succes btn btn-block add-btn rounded-lg p-2 text-center bg-gradient-to-r from-purple-500 to-pink-600 text-white hover:bg-gradient-to-r hover:from-purple-400 hover:to-pink-500" value = "Trimite datele">
+            </div>
+        </div>
+    </form> 
+
+        <br>
+
+        <div class="box-element hidden" id="payment-info">
+            <!--<small class="text-lg">Plateste prin PayPal </small>-->
+             <!-- Set up a container element for the button -->
+            <div id="paypal-button-container"></div>
+
+                <script>
+                    // Render the PayPal button into #paypal-button-container
+                    paypal.Buttons({
+
+                            style: {
+                            color:  'blue',
+                            shape:  'pill',
+                            label:  'pay',
+                            height: 40
+                        }
+                
+                    }).render('#paypal-button-container');
+                </script>
+            </div>
+
+            <br>
+            <strong class="text-2xl">Sumar</strong>
+        
+            {% for item in items%}
+                <div class="grid grid-cols-5">
+                    <img class="w-60 h-30 rounded-xl p-2 gap-y-2" src="{{item.product.imageURL}}">
+                    <strong class="text-center gap-y-2">{{item.product.name}}</strong>
+                    <strong>{{item.product.price | floatformat:2}} lei/bucata</strong>
+                    <strong>{{item.quantity}} bucati </strong>
+                    <strong>In valoare de {{item.get_total}} lei</strong>
+                </div>
+            {% endfor %}
+            <div class="grid grid-cols-3 text-align-center">
+        
+                <div>
+                    <strong class="text-xl">Articole: {{ order.get_cart_items }}</strong>
+                </div>
+                <div></div>
+                <div>
+                    <strong class="text-xl">Total: {{ order.get_cart_total|floatformat:2 }} lei</strong>
+                </div>
+            </div>
+        </div>
+    
+    
+</div>
+
+<!-- Include the PayPal JavaScript SDK -->
+<script src="https://www.paypal.com/sdk/js?client-id=test&currency=USD&disable-funding=card"></script>
+
+<script>
+    // Render the PayPal button into #paypal-button-container
+
+    var total = '{{order.get_cart_total}}'
+
+    paypal
+        .Buttons({
+
+        style: {
+            color: 'blue',
+            shape: 'pill'
+        },
+
+        // Set up the transaction
+        createOrder: function(data, actions) {
+            return actions.order.create({
+                purchase_units: [{
+                    amount: {
+                        value: (parseFloat(total)/4.68).toFixed(2)
+                    }
+                }]
+            });
+        },
+
+        // Finalize the transaction
+        onApprove: function(data, actions) {
+            return actions.order.capture().then(function(orderData) {
+                submitFormData()
+            });
+        }
+
+
+    }).render('#paypal-button-container');
+
+    var shipping = '{{order.shipping}}'
+    //document.getElementById('user-info').innerHTML = ''
+   if(shipping == 'False'){
+       document.getElementById('shipping-info').innerHTML = ''
+
+
+    //Hide entire form if user is logged in and shipping is False
+
+    document.getElementById('form-wrapper').classList.add("hidden");
+
+    //Show payment if user logged in user wants to buy an item does not require shipping
+
+    document.getElementById('payment-info').classList.remove("hidden");
+
+   }
+
+   var formularu = document.getElementById('form')
+
+   csrftoken = formularu.getElementsByTagName("input")[0].value
+
+   formularu.addEventListener('submit', function(e){
+       e.preventDefault()
+       document.getElementById('form-button').classList.add("hidden")
+       document.getElementById('payment-info').classList.remove("hidden")
+   })
+
+   console.log(JSON.stringify(formularu))
+
+
+
+   function submitFormData(){
+
+       var userFormData = {
+           'name': null,
+           'email': null,
+           'total': total,
+       }
+
+       var shippingInfo = {
+           'address': null,
+           'city': null,
+           'road':null,
+           'building': null,
+       }
+
+       if(shipping != 'False'){
+           shippingInfo.address = formularu.address.value
+           shippingInfo.city = formularu.city.value
+           shippingInfo.road = formularu.road.value
+           shippingInfo.building = formularu.building.value
+       }
+
+       var url = '/processOrder/'
+       fetch(url, {
+           method:'POST',
+           headers: {
+               'Content-Type': 'application/json',
+               'X-CSRFToken': csrftoken,
+           },
+           body:JSON.stringify({'form': userFormData, 'shipping':shippingInfo})
+           
+       })
+       .then((response) => response.json())
+       .then((data) => {
+           alert("Tranzactie finalizata");
+
+           window.location.href = "{% url 'store' %}"
+       })
+   }
+</script>
+
+{%endblock content%}

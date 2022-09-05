@@ -1,0 +1,24 @@
+{% extends 'store/main.html' %}
+
+{% load static %}
+
+{% block content %}
+
+
+
+<div class = "text-2xl object-center p-10">
+    
+
+    <div class="object-center p-10 border-2 border-purple-900 rounded-lg">
+        <h1 class="text-center text-3xl py-10"><strong>404 Pagină negasită </strong></h1>
+        <p class="text-center p-10">Această pagină nu există. Te rugăm să revii la pagina iniţială.</p>
+
+        <div class="grid grid-cols-3">
+            <div></div>
+            <a href="{% url 'store' %}" class="btn text-2xl  btn-outline-secondary rounded-lg p-2 text-center bg-gradient-to-r from-purple-500 to-pink-600 text-white hover:bg-gradient-to-r hover:from-purple-400 hover:to-pink-500 object-center">Înapoi la cumpărături</a>
+            <div></div>
+        </div>
+    </div>
+</div>
+
+{%endblock content%}

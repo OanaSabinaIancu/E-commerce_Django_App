@@ -1,0 +1,19 @@
+{
+  "name": "prajituria",
+  "version": "1.0.0",
+  "description": "Prajituria Moft",
+  "main": "index.js",
+  "dependencies": {
+    "autoprefixer": "^9.8.6",
+    "postcss": "^7.0.36",
+    "postcss-cli": "^8.3.1",
+    "react-multi-carousel": "^2.8.0",
+    "tailwindcss": "^2.2.7",
+    "tw-elements": "^1.0.0-alpha12"
+  },
+  "scripts": {
+    "start": "npx tailwindcss-cli@latest build -i main.css -o static/css/main.css --watch"
+  },
+  "author": "Iancu Oana-Sabina",
+  "license": "ISC"
+}

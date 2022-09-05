@@ -1,0 +1,40 @@
+{% extends 'store/main.html' %}
+
+{% load static %}
+
+    
+{% block content %}
+
+<form method="POST" action = "">
+    {%csrf_token%}
+<div class= "lg:grid grid-cols-2">
+    <div class="">
+        <img class="object-contain  h-120 w-100 p-20 border-purple-500 rounded-xl" src="{{ prod.imageURL }}">
+    </div>
+
+    <div>
+        <h1 class="text-left p-8 text-3xl"><strong>{{ prod.price }} lei<strong></h1>
+        <p class="text-left text-xl">Atentie!<p>
+        <p class="text-left text-xl">Acest produs nu are specificatii calorice deoarece este realizat in functie de dorintele cumparatorului. Pentru realizarea unei astfel de comenzi este necesara lasarea retetei in lista de observatii.<p>
+        <p class="text-left text-xl">*Orice comanda care nu contine o reteta de prajituri completa sau corecta nu va fi onorata.<p>
+        <p class="text-left text-xl">**Cele mai bune retete vor fi adaugate in sectiunea de produse speciale recomandate de cumparatori.<p>
+        <p class="text-left text-xl">***Pentru mai multe produse speciale vor fi trecute toate retetele in acelasi formular, separate prin ENTER.<p>
+        <div class= "grid xl:grid-cols-2 sm:grid-cols-1 p-2">
+            <div>
+                <p class="text-xl"><strong>Introdu reteta</strong></p>
+                {{form.ingredients}}
+                <!--<textarea rows="5" cols="50" class="text-lg" name = "message" placeholder="Scrie reteta aici">
+                    
+                </textarea>-->
+            </div>
+            <div class="lg: p-8">
+                <button data-product={{prod.id}} data-action="add" class="px-10 btn btn-outline-secondary add-btn rounded-lg p-2 text-center bg-gradient-to-r from-purple-500 to-pink-600 text-white hover:bg-gradient-to-r hover:from-purple-400 hover:to-pink-500 add-btn update-cart">Adauga in cos</button>
+                <input class="px-10 rounded-lg p-2 text-center bg-gradient-to-r from-blue-500 to-purple-600 text-white hover:bg-gradient-to-r hover:from-blue-400 hover:to-purple-500" type = "submit"></input>
+                <!--<button  class="px-10 btn btn-outline-secondary add-btn rounded-lg p-2 text-center bg-gradient-to-r from-blue-500 to-purple-600 text-white hover:bg-gradient-to-r hover:from-blue-400 hover:to-purple-500 add-btn update-cart">Confirma reteta</button>-->
+            </div>
+        </div>
+    </div>
+</div>
+</form>
+
+{% endblock content %}

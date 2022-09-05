@@ -1,0 +1,241 @@
+<!DOCTYPE html> 
+{% load static %}
+
+<html>
+
+<head>
+
+    <title>
+        Prajituria Moft
+    </title>
+
+    <link rel="stylesheet" type="text/css" href = "{% static 'css/main.css' %}">
+    <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
+
+    <script src="https://cdn.jsdelivr.net/npm/tw-elements/dist/js/index.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tw-elements/dist/css/index.min.css" />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+    tailwind.config = {
+        theme: {
+        extend: {
+            fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            },
+        }
+        }
+    }
+    </script>
+
+    <meta name="viewport" content="width=device-width, inital-scale=1, maximum-scale=1, minimum-scale=1" />
+
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Cookie&display=swap');
+      body {
+        font-family: 'Cookie', cursive;
+        color: #000000;
+        
+        padding:5%;
+      }
+
+      h1{
+          text-align:center;
+          
+      }
+    </style>
+    
+    <script type="text/javascript">
+        var user = '{{request.user}}'
+
+        function getToken(name) {
+            let cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                const cookies = document.cookie.split(';');
+                for (let i = 0; i < cookies.length; i++) {
+                    const cookie = cookies[i].trim();
+                    // Does this cookie string begin with the name we want?
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                        }
+                    }
+                }
+                return cookieValue;
+        }
+        var csrftoken = getToken('csrftoken');
+
+        function getCookie(name){
+
+            //Split cookie string and get all individual name = value pairs in array 
+
+            var cookieArr = document.cookie.split(";");
+
+            for(var i = 0; i < cookieArr.length; i++)
+            {
+                var cookiePair = cookieArr[i].split("=");
+
+                //removing white space at the beginning 
+
+                if(name == cookiePair[0].trim())
+                {
+                    
+                    ///Decode the cookie value and return 
+
+                    return decodeURIComponent(cookiePair[1]);
+                }
+            }
+
+            return null;
+
+        }
+
+        var cart  = JSON.parse(getCookie('cart'))
+
+        if(cart == undefined)
+        {
+            cart = {}
+            console.log("Cart was created")
+
+            document.cookie = 'cart=' + JSON.stringify(cart) + ";domain=;path=/" ///Setam valoarea cookie-ului
+        }
+
+        console.log('Cart: ', cart)
+    </script>
+
+</head>
+ 
+<div class="flex justify-between py-3 md:flex w-full md:w-auto px-3 md:text-right">
+
+    <a href="{% url 'store' %}"><img src="{%static 'images/logo.png' %}" alt="logo" class="w-20 h-20 md:w-30 md:h-30 mx-1"/></a>
+
+    {% if request.user.is_authenticated %}
+            <span class="mr-7 mt-2 font-semibold text-xl text-blue-600"><a href= "/profile" class="mr-7 mt-2 font-semibold text-xl text-blue-600">Buna, {{request.user.username}}</a></span>
+        {% endif %}
+    
+    <a href="{% url 'cart' %}">
+
+        <span class="relative inline-block right-2">
+            
+        <svg id="cart-icon" class="ml-auto" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="64" height="64" viewBox="0 0 172 172" style=" fill:#000000;"><g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal"><path d="M0,172v-172h172v172z" fill="none"></path><g fill="#9f6fea"><path d="M58.62041,127.94694c-8.72384,0 -15.79592,7.07207 -15.79592,15.79592c0,8.72384 7.07207,15.79592 15.79592,15.79592c8.72384,0 15.79592,-7.07207 15.79592,-15.79592c0,-8.72384 -7.07207,-15.79592 -15.79592,-15.79592zM58.62041,152.51837c-4.84658,0 -8.77551,-3.92893 -8.77551,-8.77551c0,-4.84658 3.92893,-8.77551 8.77551,-8.77551c4.84658,0 8.77551,3.92893 8.77551,8.77551c0,4.84658 -3.92893,8.77551 -8.77551,8.77551zM125.31429,127.94694c-8.72384,0 -15.79592,7.07207 -15.79592,15.79592c0,8.72384 7.07207,15.79592 15.79592,15.79592c8.72384,0 15.79592,-7.07207 15.79592,-15.79592c0,-8.72384 -7.07207,-15.79592 -15.79592,-15.79592zM125.31429,152.51837c-4.84658,0 -8.77551,-3.92893 -8.77551,-8.77551c0,-4.84658 3.92893,-8.77551 8.77551,-8.77551c4.84658,0 8.77551,3.92893 8.77551,8.77551c0,4.84658 -3.92893,8.77551 -8.77551,8.77551zM158.13469,34.4l-114.25714,-1.57959l-3.15918,-9.65306c-2.22547,-6.45298 -8.2683,-10.80944 -15.09388,-10.88163h-11.75918c-1.93863,0 -3.5102,1.57157 -3.5102,3.5102c0,1.93863 1.57157,3.5102 3.5102,3.5102h11.75918c3.81652,0.08421 7.17741,2.53485 8.42449,6.14286l22.2898,67.22041l-1.7551,4.03673c-1.95734,5.04796 -1.36965,10.729 1.57959,15.26939c2.92083,4.45917 7.83506,7.21114 13.16327,7.37143h68.27347c1.93863,0 3.5102,-1.57157 3.5102,-3.5102c0,-1.93863 -1.57157,-3.5102 -3.5102,-3.5102h-68.27347c-3.00909,-0.07534 -5.77883,-1.65805 -7.37143,-4.21224c-1.57469,-2.52303 -1.89845,-5.63108 -0.87755,-8.42449l1.40408,-3.15918l73.8898,-7.72245c8.11628,-0.89387 14.79255,-6.7971 16.67347,-14.74286l8.42449,-35.27755c0.38007,-1.01631 0.17845,-2.15884 -0.52653,-2.98367c-0.73084,-0.79836 -1.73097,-1.29843 -2.80816,-1.40408zM146.2,72.48571c-1.13955,5.11483 -5.48226,8.88801 -10.70612,9.30204l-73.01224,7.54694l-16.32245,-49.49388l107.58776,1.57959z"></path></g></g></svg>
+        <span id = "cart-total" class="absolute top-2 right-2 inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-red-100 transform translate-x-1/2 -translate-y-1/2 rounded-full">{{cartProd}}
+        </span>
+    </a>
+</div>
+<body class="bg-cover" style="background-image: url({% static 'images/fundal.png'%});">
+    <div class="bg-gradient-to-r from-indigo-400 to-blue-300 bg-opacity-50 text-purple-900  md:container md:mx-auto p-0 m-0 rounded-lg ">    
+
+    
+        <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer>
+
+        </script>
+        <nav class="items-center justify-between w-full border-2-blue">      
+        
+            
+
+            <div class="flex md:hidden rounded-lg bg-gradient-to-r from-indigo-500 to-pink-600"> 
+                <button id="hamburger">
+                    
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+                </button>
+            </div>
+
+
+            <div class="toggle hidden md:flex w-full md:w-auto text-center font-semibold mt-5 md:mt-0 p-0 m-0 md:mr-auto text-xl rounded-lg bg-gradient-to-r from-indigo-500 to-pink-600">        
+                <a href="{% url 'store' %}" class="text-xl md:text-3xl block py-4 md:px-10 xl:px-20 text-white font-semibold hover:text-pink-100 transition duration-300">Reduceri</a>
+                        <a href="{% url 'description' %}" class="text-xl md:text-3xl block py-4 md:px-10 xl:px-20 text-white font-semibold hover:text-pink-100 transition duration-300">Produse</a>
+                        <a href="{% url 'recipes' %}" class="text-xl md:text-3xl block py-4 md:px-10 xl:px-20 text-white font-semibold hover:text-pink-100 transition duration-300">Retete</a>
+                        <a href="{% url 'presentation' %}" class="text-xl md:text-3xl block py-4 md:px-10 xl:px-20 text-white font-semibold hover:text-pink-100 transition duration-300">Prezentare</a>
+                        {% if request.user.is_authenticated %}
+                            <a href="{% url 'logout' %}" class="text-xl md:text-3xl block py-4 md:px-10 xl:px-20 text-white font-semibold hover:text-pink-100 transition duration-300">Deconectare</a>
+                        {% else %}
+                        <a href="{% url 'loginPage' %}" class="text-xl md:text-3xl block py-4 md:px-10 xl:px-20 text-white font-semibold hover:text-pink-100 transition duration-300">Autentificare</a>
+                        {% endif %}
+            </div>  
+        </nav>
+
+        <main>
+            {%block content%}
+
+            {%endblock content%}
+
+        </main>
+
+        <div class="hover:animate-pulse">
+            <!-- Back to top button -->
+            <button
+            type="button"
+            data-mdb-ripple="true"
+            data-mdb-ripple-color="light"
+            class="inline-block p-3 text-white font-medium text-xs leading-tight uppercase rounded-full shadow-md hover:bg-pink-200 hover:shadow-lg focus:bg-pink-200 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-pink-200 active:shadow-lg transition duration-150 ease-in-out hidden bottom-5 right-5 fixed"
+            id="btn-back-to-top"
+            >
+            <img src="data:image/png;base64,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"/>
+            </button>
+        </div>
+    </div>
+
+    <footer class="bg-blue-800 text-xl text-white text-center md:container md:mx-auto p-0 m-0 rounded-lg grid grid-cols-3">
+        <div>
+            <address id="adresa" class="light">
+                telefon: <a href ="tel:0761245349"class="light" >0761245349</a>
+                
+            </address>
+        </div>
+        <div>
+            <address id="adresa" class="light">
+                email: <a href ="mailto:prajituriamoft.com"class="light">prajituriamoft.com
+            </address>
+            <small>&copy;Copyright <time datetime="08.06.2022">2022</time> creat de Sabina Iancu</small><br>
+        </div>
+        <div>
+            <address id="adresa" class="light">
+                adresa fizica: bulevardul Republicii, Ploiesti, Romania
+            </address>
+        </div>
+    </footer>
+</body>
+
+<script>
+    // Get the button
+    let mybutton = document.getElementById('btn-back-to-top');
+
+    // When the user scrolls down 20px from the top of the document, show the button
+    window.onscroll = function () {
+    scrollFunction();
+    };
+
+    function scrollFunction() {
+    if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+        mybutton.style.display = 'block';
+    } else {
+        mybutton.style.display = 'none';
+    }
+    }
+    // When the user clicks on the button, scroll to the top of the document
+    mybutton.addEventListener('click', backToTop);
+
+    function backToTop() {
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+    }
+</script>
+
+<script type="text/javascript" src = "{% static 'js/cart.js' %}"></script> 
+
+<script>
+    document.getElementById("hamburger").onclick = function toggleMenu() {
+        const navToggle = document.getElementsByClassName("toggle");
+        for (let i = 0; i < navToggle.length; i++) {
+            navToggle.item(i).classList.toggle("hidden");
+        }
+    };
+</script>
+
+
+
+</html>

@@ -1,0 +1,297 @@
+{% extends 'store/main.html' %}
+
+{% load static %}
+
+
+{% block content %}
+
+<style>
+  
+  .sidebar {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+  }
+  
+  .sidebar a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    display: block;
+    transition: 0.3s;
+  }
+  
+  .sidebar .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    margin-left: 50px;
+  }
+  
+  .openbtn {
+    font-size: 20px;
+    cursor: pointer;
+    padding: 10px 15px;
+    border: none;
+  }
+  
+  #main {
+    transition: margin-left .5s;
+    padding: 16px;
+  }
+  
+  /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+  @media screen and (max-height: 450px) {
+    .sidebar {padding-top: 15px;}
+    .sidebar a {font-size: 18px;}
+  }
+  </style>
+  
+  
+<div id="mySidebar" class="sidebar bg-gradient-to-r from-purple-200 to-pink-100 text-purple-800 text-2xl">
+  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+
+  <form method="GET" action= "">
+
+      <!--Ordonare pret-->
+
+      <div class="flex justify-center">
+
+
+        <div class="mb-3 xl:w-56">
+
+          <p class="text-xl">Filtrare dupa nume</p>
+
+          {{myFilter.form.name}}
+
+
+          <p class="text-xl">Filtrare dupa pret</p>
+
+          {{myFilter.form.price}}
+
+          <p class="text-xl">Filtrare produse vegane</p>
+
+          {{myFilter.form.vegan}}
+
+          <p class="text-xl">Filtrare dupa categorie</p>
+
+          {{myFilter.form.category}}
+
+          <p class="text-xl">Filtrare dupa procentul reducerii</p>
+
+          {{myFilter.form.sales}}
+          
+        </div>
+      </div>
+
+      <!--Sortare dupa rating-->
+
+      <!--<div class="text-xl p-4">
+        <p class="text-2xl">Recenzii</p>
+        <ul class="flex justify-left p-2">
+          <li>
+            <div class="form-check">
+              <input class="form-check-input appearance-none h-4 w-4 border border-purple-500 rounded-sm bg-white checked:bg-pink-600 checked:border-pink-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer" type="checkbox" value="" id="flexCheckDefault">
+            </div>
+          </li>
+          <li>
+            <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="heart" class="w-3.5 text-red-500 mr-1" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+              <path fill="currentColor" d="M462.3 62.6C407.5 15.9 326 24.3 275.7 76.2L256 96.5l-19.7-20.3C186.1 24.3 104.5 15.9 49.7 62.6c-62.8 53.6-66.1 149.8-9.9 207.9l193.5 199.8c12.5 12.9 32.8 12.9 45.3 0l193.5-199.8c56.3-58.1 53-154.3-9.8-207.9z"></path>
+            </svg>
+          </li>
+          <li>
+            <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="heart" class="w-3.5 text-red-500 mr-1" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+              <path fill="currentColor" d="M462.3 62.6C407.5 15.9 326 24.3 275.7 76.2L256 96.5l-19.7-20.3C186.1 24.3 104.5 15.9 49.7 62.6c-62.8 53.6-66.1 149.8-9.9 207.9l193.5 199.8c12.5 12.9 32.8 12.9 45.3 0l193.5-199.8c56.3-58.1 53-154.3-9.8-207.9z"></path>
+            </svg>
+          </li>
+          <li>
+            <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="heart" class="w-3.5 text-red-500 mr-1" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+              <path fill="currentColor" d="M462.3 62.6C407.5 15.9 326 24.3 275.7 76.2L256 96.5l-19.7-20.3C186.1 24.3 104.5 15.9 49.7 62.6c-62.8 53.6-66.1 149.8-9.9 207.9l193.5 199.8c12.5 12.9 32.8 12.9 45.3 0l193.5-199.8c56.3-58.1 53-154.3-9.8-207.9z"></path>
+            </svg>
+          </li>
+          <li>
+            <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="heart" class="w-3.5 text-red-500 mr-1" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+              <path fill="currentColor" d="M462.3 62.6C407.5 15.9 326 24.3 275.7 76.2L256 96.5l-19.7-20.3C186.1 24.3 104.5 15.9 49.7 62.6c-62.8 53.6-66.1 149.8-9.9 207.9l193.5 199.8c12.5 12.9 32.8 12.9 45.3 0l193.5-199.8c56.3-58.1 53-154.3-9.8-207.9z"></path>
+            </svg>
+          </li>
+          <li>
+            <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="heart" class="w-3.5 text-red-500 mr-1" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+              <path fill="currentColor" d="M462.3 62.6C407.5 15.9 326 24.3 275.7 76.2L256 96.5l-19.7-20.3C186.1 24.3 104.5 15.9 49.7 62.6c-62.8 53.6-66.1 149.8-9.9 207.9l193.5 199.8c12.5 12.9 32.8 12.9 45.3 0l193.5-199.8c56.3-58.1 53-154.3-9.8-207.9z"></path>
+            </svg>
+          </li>
+        </ul>
+        <ul class="flex justify-left p-2">
+          <li>
+            <div class="form-check">
+              <input class="form-check-input appearance-none h-4 w-4 border border-purple-500 rounded-sm bg-white checked:bg-pink-600 checked:border-pink-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer" type="checkbox" value="" id="flexCheckDefault">
+            </div>
+          </li>
+          <li>
+            <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="heart" class="w-3.5 text-red-500 mr-1" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+              <path fill="currentColor" d="M462.3 62.6C407.5 15.9 326 24.3 275.7 76.2L256 96.5l-19.7-20.3C186.1 24.3 104.5 15.9 49.7 62.6c-62.8 53.6-66.1 149.8-9.9 207.9l193.5 199.8c12.5 12.9 32.8 12.9 45.3 0l193.5-199.8c56.3-58.1 53-154.3-9.8-207.9z"></path>
+            </svg>
+          </li>
+          <li>
+            <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="heart" class="w-3.5 text-red-500 mr-1" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+              <path fill="currentColor" d="M462.3 62.6C407.5 15.9 326 24.3 275.7 76.2L256 96.5l-19.7-20.3C186.1 24.3 104.5 15.9 49.7 62.6c-62.8 53.6-66.1 149.8-9.9 207.9l193.5 199.8c12.5 12.9 32.8 12.9 45.3 0l193.5-199.8c56.3-58.1 53-154.3-9.8-207.9z"></path>
+            </svg>
+          </li>
+          <li>
+            <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="heart" class="w-3.5 text-red-500 mr-1" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+              <path fill="currentColor" d="M462.3 62.6C407.5 15.9 326 24.3 275.7 76.2L256 96.5l-19.7-20.3C186.1 24.3 104.5 15.9 49.7 62.6c-62.8 53.6-66.1 149.8-9.9 207.9l193.5 199.8c12.5 12.9 32.8 12.9 45.3 0l193.5-199.8c56.3-58.1 53-154.3-9.8-207.9z"></path>
+            </svg>
+          </li>
+          <li>
+            <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="heart" class="w-3.5 text-red-500 mr-1" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+              <path fill="currentColor" d="M462.3 62.6C407.5 15.9 326 24.3 275.7 76.2L256 96.5l-19.7-20.3C186.1 24.3 104.5 15.9 49.7 62.6c-62.8 53.6-66.1 149.8-9.9 207.9l193.5 199.8c12.5 12.9 32.8 12.9 45.3 0l193.5-199.8c56.3-58.1 53-154.3-9.8-207.9z"></path>
+            </svg>
+          </li>
+        </ul>
+        <ul class="flex justify-left p-2">
+          <li>
+            <div class="form-check">
+              <input class="form-check-input appearance-none h-4 w-4 border border-purple-500 rounded-sm bg-white checked:bg-pink-600 checked:border-pink-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer" type="checkbox" value="" id="flexCheckDefault">
+            </div>
+          </li>
+          <li>
+            <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="heart" class="w-3.5 text-red-500 mr-1" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+              <path fill="currentColor" d="M462.3 62.6C407.5 15.9 326 24.3 275.7 76.2L256 96.5l-19.7-20.3C186.1 24.3 104.5 15.9 49.7 62.6c-62.8 53.6-66.1 149.8-9.9 207.9l193.5 199.8c12.5 12.9 32.8 12.9 45.3 0l193.5-199.8c56.3-58.1 53-154.3-9.8-207.9z"></path>
+            </svg>
+          </li>
+          <li>
+            <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="heart" class="w-3.5 text-red-500 mr-1" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+              <path fill="currentColor" d="M462.3 62.6C407.5 15.9 326 24.3 275.7 76.2L256 96.5l-19.7-20.3C186.1 24.3 104.5 15.9 49.7 62.6c-62.8 53.6-66.1 149.8-9.9 207.9l193.5 199.8c12.5 12.9 32.8 12.9 45.3 0l193.5-199.8c56.3-58.1 53-154.3-9.8-207.9z"></path>
+            </svg>
+          </li>
+          <li>
+            <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="heart" class="w-3.5 text-red-500 mr-1" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+              <path fill="currentColor" d="M462.3 62.6C407.5 15.9 326 24.3 275.7 76.2L256 96.5l-19.7-20.3C186.1 24.3 104.5 15.9 49.7 62.6c-62.8 53.6-66.1 149.8-9.9 207.9l193.5 199.8c12.5 12.9 32.8 12.9 45.3 0l193.5-199.8c56.3-58.1 53-154.3-9.8-207.9z"></path>
+            </svg>
+          </li>
+        </ul>
+        <ul class="flex justify-left p-2">
+          <li>
+            <div class="form-check">
+              <input class="form-check-input appearance-none h-4 w-4 border border-purple-500 rounded-sm bg-white checked:bg-pink-600 checked:border-pink-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer" type="checkbox" value="" id="flexCheckDefault">
+            </div>
+          </li>
+          <li>
+            <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="heart" class="w-3.5 text-red-500 mr-1" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+              <path fill="currentColor" d="M462.3 62.6C407.5 15.9 326 24.3 275.7 76.2L256 96.5l-19.7-20.3C186.1 24.3 104.5 15.9 49.7 62.6c-62.8 53.6-66.1 149.8-9.9 207.9l193.5 199.8c12.5 12.9 32.8 12.9 45.3 0l193.5-199.8c56.3-58.1 53-154.3-9.8-207.9z"></path>
+            </svg>
+          </li>
+          <li>
+            <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="heart" class="w-3.5 text-red-500 mr-1" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+              <path fill="currentColor" d="M462.3 62.6C407.5 15.9 326 24.3 275.7 76.2L256 96.5l-19.7-20.3C186.1 24.3 104.5 15.9 49.7 62.6c-62.8 53.6-66.1 149.8-9.9 207.9l193.5 199.8c12.5 12.9 32.8 12.9 45.3 0l193.5-199.8c56.3-58.1 53-154.3-9.8-207.9z"></path>
+            </svg>
+          </li>
+          
+        </ul>
+        <ul class="flex justify-left p-2">
+          <li>
+            <div class="form-check">
+              <input class="form-check-input appearance-none h-4 w-4 border border-purple-500 rounded-sm bg-white checked:bg-pink-600 checked:border-pink-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer" type="checkbox" value="" id="flexCheckDefault">
+            </div>
+          </li>
+          <li>
+            <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="heart" class="w-3.5 text-red-500 mr-1" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+              <path fill="currentColor" d="M462.3 62.6C407.5 15.9 326 24.3 275.7 76.2L256 96.5l-19.7-20.3C186.1 24.3 104.5 15.9 49.7 62.6c-62.8 53.6-66.1 149.8-9.9 207.9l193.5 199.8c12.5 12.9 32.8 12.9 45.3 0l193.5-199.8c56.3-58.1 53-154.3-9.8-207.9z"></path>
+            </svg>
+          </li>
+        </ul>
+      </div>-->
+      <div class="p-6">
+        <button class="submit px-4 py-2.5 bg-gradient-to-r from-purple-500 to-pink-600 text-white font-medium text-xl leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg--gradient-to-r from-purple-400 to-pink-500 active:shadow-lg active:text-white flex items-center whitespace-nowrap" type="submit">
+          Filtreaza
+      </button>
+      </div>
+  </form>
+</div>
+  
+  <div id="main">
+    <button class="openbtn" onclick="openNav()"><img src="data:image/png;base64,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"/></button>  
+  </div>
+<script>
+  function openNav() {
+    document.getElementById("mySidebar").style.width = "250px";
+    document.getElementById("main").style.marginLeft = "250px";
+  }
+  
+  function closeNav() {
+    document.getElementById("mySidebar").style.width = "0";
+    document.getElementById("main").style.marginLeft= "0";
+  }
+</script>   
+
+
+
+<div class="row grid grid-cols-1 xl:grid-cols-4 p-3 md:grid-cols-3 sm:grid-cols-2 gap-x-5 gap-y-5 px-5">
+
+
+    {% for product in products%}
+    {% if product.category == 'special'%}
+    <div class="col lg-4 text-xl md:text-2xl border-4 border-indigo-600 rounded-xl bg-gradient-to-r from-blue-300 to-indigo-300">
+      {%if product.sales%}
+        <strong class="absolute text-2xl text-white border-2 border-pink-600 rounded-2xl bg-pink-600 text-right">
+            -{{product.sales}}%
+        </strong>
+        {% endif %}
+        <a class="btn btn-outline-succes hover:text-blue-700" href = "{% url 'special' %}"><img class="thumbnail rounded-lg" src="{{product.imageURL}}"></a>
+        <div class="p-2 product text-center">
+            <h6><strong><a class="btn btn-outline-succes hover:text-blue-700" href = "{% url 'special' %}">{{product.name}}</a></strong></h6>
+            <hr>
+            
+            <h4 class="text-center">
+              {%if product.sales%}
+              <strong class="text-2xl ">
+                {{product.price|floatformat:2}} Lei
+            </strong>
+              {% else%}
+              <strong class="text-2xl">
+                {{product.price|floatformat:2}} Lei
+            </strong>
+              {%endif%}
+            </h4>
+            <!--<button data-product={{product.id}} data-action="add" class="btn btn-outline-secondary add-btn rounded-lg p-2 text-center bg-gradient-to-r from-purple-500 to-pink-600 text-white hover:bg-gradient-to-r hover:from-purple-400 hover:to-pink-500 add-btn update-cart">Adauga in cos</button>-->
+            <button data-product={{product.id}} data-action="add" class="btn btn-outline-secondary add-btn rounded-lg p-2 text-center bg-gradient-to-r from-purple-500 to-pink-600 text-white hover:bg-gradient-to-r hover:from-purple-400 hover:to-pink-500 add-btn update-cart">Adauga in cos</button>
+          </button>
+           
+        </div>
+    </div>
+    {% else %}
+    <div class="col lg-4 text-xl md:text-2xl border-4 border-indigo-600 rounded-xl bg-gradient-to-r from-blue-300 to-indigo-300">
+      {%if product.sales%}
+        <strong class="absolute text-2xl text-white border-2 border-pink-600 rounded-2xl bg-pink-600 text-right">
+            -{{product.sales}}%
+        </strong>
+        {%endif %}
+        <a class="btn btn-outline-succes hover:text-blue-700" href = "{{ product.id }}"><img class="thumbnail rounded-lg" src="{{product.imageURL}}"></a>
+        <div class="p-2 product text-center">
+            <h6><strong><a class="btn btn-outline-succes hover:text-blue-700" href = "{{ product.id }}">{{product.name}}</a></strong></h6>
+            <hr>
+            
+            <h4 class="text-center">
+              {%if product.sales%}
+              <strong class="text-2xl ">
+                {{product.price|floatformat:2}} Lei
+            </strong>
+              {% else%}
+              <strong class="text-2xl">
+                {{product.price|floatformat:2}} Lei
+            </strong>
+              {%endif%}
+            </h4>
+            <button data-product={{product.id}} data-action="add" class="btn btn-outline-secondary add-btn rounded-lg p-2 text-center bg-gradient-to-r from-purple-500 to-pink-600 text-white hover:bg-gradient-to-r hover:from-purple-400 hover:to-pink-500 add-btn update-cart">Adauga in cos</button>
+           
+        </div>
+    </div>
+    {% endif %}
+    {% endfor %}
+</div>
+
+{%endblock content%}

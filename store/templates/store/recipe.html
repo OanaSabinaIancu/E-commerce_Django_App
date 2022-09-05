@@ -1,0 +1,44 @@
+{% extends 'store/main.html' %}
+
+{% load static %}
+
+    
+{% block content %}
+
+<div class= "grid xl:grid-cols-2 lg:grid-cols-1">
+    <div >
+        <img class="object-contain rounded-lg h-80 w-100 p-4" src="{{ recipe.imageURL }}">
+    </div>
+    <div class="border-solid-purple-500 rounded-xl">
+        <h1 class="text-left text-2xl p-4"><strong>{{ recipe.title }}<strong></h1>
+        <div class= "lg:grid grid-cols-2">
+            <div>
+                <p class="text-left px-4 text-xl">Ingrediente blat</p>
+                {% for ingred in cakeing %}
+                    <p class="text-left px-4 text-lg">{{ ingred }}</p>
+                {% endfor %}
+            </div>
+            <div>
+                <p class="text-left px-4 text-xl">Ingrediente crema</p>
+                {% for ingred in creaming %}
+                    <p class="text-left px-4 text-lg">{{ ingred }}</p>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<div>
+    <p class="text-left px-6 text-lg"><strtong>Mod de prepare blat: <strong></p>
+    <p class="text-left px-6 text-lg">{{ recipe.cakePrep }}</p>
+    <p class="text-left px-6 text-lg"><strong>Mod de preparare crema: <strong></p>
+
+    <p class="text-left px-6 text-lg">{{ recipe.creamPrep }}</p>
+
+    <div class="grid grid-cols-2 p-4">
+        <a href="{% url 'recipes' %}" class="btn text-2xl    btn-outline-secondary rounded-lg p-2 text-center bg-gradient-to-r from-purple-500 to-pink-600 text-white hover:bg-gradient-to-r hover:from-purple-400 hover:to-pink-500">Inapoi la retete</a>
+        <a href="{% url 'store' %}" class="btn text-2xl  btn-outline-secondary rounded-lg p-2 text-center bg-gradient-to-r from-blue-500 to-purple-600 text-white hover:bg-gradient-to-r hover:from-blue-400 hover:to-purple-500">Inapoi la cumparaturi</a>
+    </div>
+</div>
+
+{% endblock content %}

@@ -1,0 +1,57 @@
+{% extends 'store/main.html' %}
+
+{% load static %}
+
+{% block content %}
+<br>
+<h1 class="text-center text-2xl"><strong>Profil</strong></h1>
+<div class = "justify-between text-xl p-6">
+    <div class="p-10 border border-2 border-purple-900 rounded-xl grid grid-cols-2">
+        
+        <div class="object-center p-4">
+            {%if request.user.customer.profile_pic%}
+                <img class="object-contain h-75 w-65 rounded-xl"src="{{request.user.customer.profileURL}}" alt="home" alt="home"/>
+            {%else%}
+                 <img class="object-contain h-75 w-65 rounded-xl"src="{% static "/images/profil3.jpg" %}" alt="home" alt="home"/>
+            {%endif%}
+            <br>
+            {% if ord %}
+                <p class="text-center text-2xl"><strong>Comenzi</strong></p><br>
+                <table>
+                    <tr class="border-2 border-purple-900 rounded-lg p-10 bg-gradient-to-r from-purple-500 to-pink-600 text-pink-100">
+                        <th class="px-8">Id comanda</th>
+                        <th class="px-8">Data comenzii</th>
+                        <th class="px-8">Statusul comenzii</th>
+                    </tr>
+                    
+                    {% for or in ord%}
+                    <tr class="border-2 border-purple-900 rounded-lg bg-gradient-to-r from-blue-300 to-purple-300 p-10">
+                        <td class="text-center px-8">{{ or }}</td>
+                        <td class="text-center px-8">{{ or.date_ordered }}</td>
+                        <td class="text-center px-8">{{ or.status }}</td>
+                    </tr>
+                    {%endfor%}
+                
+                </table>
+            {%endif%}
+        </div>
+
+        <div class="p-4">
+            <p class="text-2xl text-center"><strong> Informaţii personale:</strong></p><br>
+            <p><strong>Nume:</strong> {{customer.firstName}}</p>
+            <p><strong>Prenume:</strong> {{customer.lastName}}</p>
+            <p><strong>Număr de telefon:</strong> {{ customer.phone }}</p><br>
+            <br>
+            <div class="grid grid-cols-2 p-4">
+                <a class="btn btn-outline-succes btn btn-block add-btn rounded-lg p-2 text-center bg-gradient-to-r from-purple-500 to-pink-600 text-white hover:bg-gradient-to-r hover:from-purple-400 hover:to-pink-500" href="{% url 'description' %}">Revino la pagina cu produse</a>
+                <a class="btn btn-outline-succes btn btn-block add-btn rounded-lg p-2 text-center bg-gradient-to-r from-blue-500 to-purple-600 text-white hover:bg-gradient-to-r hover:from-blue-400 hover:to-purple-500" href="{% url 'updateProfile' %}">Modifică profilul</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div>
+    
+</div>
+
+{%endblock content%}
